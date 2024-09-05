@@ -7,10 +7,11 @@ import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 
 function App() {
+  
    return (
     <>
       <BrowserRouter>
-      <Header />
+      <Header  />
       <Routes>
         <Route path='/' element={<Homepage /> } />
         <Route path='/Signin' element={<Signin /> } />
