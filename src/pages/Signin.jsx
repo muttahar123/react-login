@@ -2,39 +2,39 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../Utils/firebase";
 
-function Signin(){
-    const [email , setEmail] = useState('')
-    const [password , setPassword] = useState('')
+function Signin() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-    const handleSignInwithGoogle = ()=>{
-      const provider = new GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      signInWithPopup(auth, provider)
-  .then((result) => {
-    console.log("result==>", result)
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    console.log("user==>",user);
-    
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    console.log("error==>",errorCode,errorMessage);
-    
-    // ...
-  });
-    }
-    return <form className="max-w-sm mx-auto py-40 ">
+  const handleSignInwithGoogle = (e) => {
+    const provider = new GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("result==>", result)
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log("user==>", user);
+
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log("error==>", errorCode, errorMessage);
+
+        // ...
+      });
+  }
+  return <div className="max-w-sm mx-auto py-40 ">
     <div className="mb-5 ">
       <label
         htmlFor="email"
@@ -47,7 +47,7 @@ function Signin(){
         id="email"
         label="email"
         value={email}
-        onChange={(e)=>setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="name@gmail.com"
         required=""
@@ -64,7 +64,7 @@ function Signin(){
         type="password"
         label="password"
         value={password}
-        onChange={(e)=> setPassword(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         id="password"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required=""
@@ -101,10 +101,10 @@ function Signin(){
     >
       Sign in with google
     </button>
-  </form>
+  </div>
 
-  
-    
+
+
 }
 
 export default Signin;
